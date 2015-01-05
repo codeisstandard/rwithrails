@@ -1,0 +1,8 @@
+<h1><%= @script %></h1>
+
+<div class="center">
+  <%= image_tag 'chickwts.png' if @script == 'Chick Weights' %>
+  <%= image_tag 'random_barplot.png' if @script == 'Random Barplot' %>
+  <%= image_tag 'overlayed_hist.png' if @script == 'Overlayed Histogram' %>
+  <%= image_tag 'color_styles.png' if @script == 'Color Styles' %>
+</div>
