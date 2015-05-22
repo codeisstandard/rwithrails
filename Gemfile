@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.7'
 # PostgreSQL
@@ -37,6 +36,9 @@ gem 'pry'
 
 # running R scripts
 gem 'rinruby'
+
+# Binary R server 
+gem 'rserve-client'
 
 # calculating time
 gem 'time_difference'
