@@ -38,7 +38,7 @@ gem 'pry'
 gem 'rinruby'
 
 # Binary R server 
-gem 'rserve-client'
+# gem 'rserve-client'
 
 # calculating time
 gem 'time_difference'
