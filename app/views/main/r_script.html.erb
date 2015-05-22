@@ -1,8 +1,7 @@
-<h1><%= @script %></h1>
+<h1>Simple R Test</h1>
 
-<div class="center">
-  <%= image_tag 'chickwts.png' if @script == 'Chick Weights' %>
-  <%= image_tag 'random_barplot.png' if @script == 'Random Barplot' %>
-  <%= image_tag 'overlayed_hist.png' if @script == 'Overlayed Histogram' %>
-  <%= image_tag 'color_styles.png' if @script == 'Color Styles' %>
+<div class="text-center">
+  Statement: <%= @results[0] %>
+  <br>
+  Evaluation: <%= @results[1] %>
 </div>

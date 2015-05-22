@@ -1,30 +1,37 @@
-<h1 class='center'>Executing R Scripts in Rails</h1>
+<h1 class='center'>R Script Test for Rails App on Heroku</h1>
 
-<div class="description col-md-6 col-md-offset-3">
-  Below are a few demonstrations of how to run R scripts within a Rails app.  The results are graphed and exported as a PNG file that can easily be displayed.
+<h3 class='text-center'>Click below to run the following...</h3>
+
+<div class="col-sm-6 col-sm-offset-3">
+
+  def r_script<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;r = RinRuby.new<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;n = 10<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;beta_0 = 1<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;beta_1 = 0.25<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;alpha = 0.05<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;seed = 23423<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;R.x = (1..n).entries<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;R.eval <<-EOF<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set.seed(#{seed})<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y <- #{beta_0} + #{beta_1}*x + rnorm(#{n})<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fit <- lm( y ~ x )<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;est <- round(coef(fit),3)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;pvalue <- summary(fit)$coefficients[2,4]<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;EOF<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;statement =  "E(y|x) ~= #{R.est[0]} + #{R.est[1]} * x"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;if R.pvalue < alpha<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response = "Reject the null hypothesis and conclude that x and y are related."<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;else<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response = "There is insufficient evidence to conclude that x and y are related."<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;end<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;@results = [statement, response]<br>
+    &nbsp;&nbsp;end<br>
+    &nbsp;&nbsp;r.quit<br>
+    &nbsp;&nbsp;r = RinRuby.new(false)
 </div>
 
-<div class="col-md-12">
-  <div class="scripts">
-    <div class="col-md-offset-3">
-      <ul class="script_link">
-        <li>
-          <%= link_to 'Chick Weights', r_script_path(script: 'Chick Weights') %>
-          - Basic barplot, no color
-        </li>
-        <li>
-          <%= link_to 'Random Barplot', r_script_path(script: 'Random Barplot') %>
-          - using 'Blues' from RColorBrewer
-        </li>
-        <li>
-          <%= link_to 'Overlayed Histogram', r_script_path(script: 'Overlayed Histogram') %>
-          - Swiss Education dataset and 'Pastel2' from RColorBrewer
-        </li>
-        <li>
-          <%= link_to 'Color Styles', r_script_path(script: 'Color Styles') %>
-          - Color Palettes provided by RColorBrewer package
-        </li>
-      </ul> 
-    </div>
-  </div>
+<div class="col-md-12 text-center">
+  <h3><%= link_to 'Run R Test', r_script_path(script: 'r_test') %></h3>
 </div>
+
