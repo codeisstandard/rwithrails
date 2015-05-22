@@ -43,6 +43,11 @@ gem 'time_difference'
 # Use unicorn as the app server
 # gem 'unicorn'
 
+group :production do
+  # Heroku Rails 4 compile assets
+  gem 'rails_12factor'
+end
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
